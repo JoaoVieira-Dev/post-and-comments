@@ -1,10 +1,23 @@
-import React from "react";
-import {Header, useStyles} from "./styled";
+import React, {useEffect, useState} from "react";
+import {Column, Header, useStyles} from "./styled";
 import {Button, Typography} from "@material-ui/core";
-import {bottonColor, primary, textColor} from "../colors";
+import { DataGrid } from '@material-ui/data-grid';
+import {bottonColor, textColor} from "../colors";
+import PostTable from "./PostTable";
 
 export default function Home() {
+    const [data, setData] = useState([]);
     const classes = useStyles();
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const result = await fetch('https://jsonplaceholder.typicode.com/posts')
+                .then((response) => response.json())
+                .then((response) => setData(response));
+        };
+        fetchData();
+    }, []);
+
     return (
         <>
             <Header>
@@ -24,6 +37,10 @@ export default function Home() {
                     <Typography>Inserir</Typography>
                 </Button>
             </Header>
+
+                <PostTable
+                    data={data}
+                />
         </>
 
     );

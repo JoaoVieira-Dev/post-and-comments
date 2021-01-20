@@ -13,6 +13,11 @@ export const Header = styled.div`
   box-shadow: 0px 1px black;
 `;
 
+export const Column = styled.div`
+  width: 90%;
+  padding: 20px;
+`;
+
 export const useStyles = makeStyles(theme => ({
     textTitle: {
         color: "#fff",
