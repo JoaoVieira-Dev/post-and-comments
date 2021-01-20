@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
-import {Column, Header, useStyles} from "./styled";
+import { Header, useStyles} from "./styled";
 import {Button, Typography} from "@material-ui/core";
-import { DataGrid } from '@material-ui/data-grid';
 import {bottonColor, textColor} from "../colors";
 import PostTable from "./PostTable";
 
@@ -11,7 +10,7 @@ export default function Home() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const result = await fetch('https://jsonplaceholder.typicode.com/posts')
+            await fetch('https://jsonplaceholder.typicode.com/posts')
                 .then((response) => response.json())
                 .then((response) => setData(response));
         };
