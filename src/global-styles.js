@@ -1,4 +1,5 @@
 import styled, { createGlobalStyle } from 'styled-components';
+import { backgroundColor } from './colors';
 
 export default createGlobalStyle`
   * {
@@ -10,6 +11,7 @@ export default createGlobalStyle`
   
   body {
     font-family: sans-serif;
+    background-color: ${backgroundColor};
   }
   
   html, body, #root {

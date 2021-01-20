@@ -1,13 +1,14 @@
-import  GlobalStyle from './global-styles';
+import GlobalStyle from './global-styles';
+import Home from './home';
 
 function App() {
-  return (
-      <>
-        <GlobalStyle />
-        <h1>Hello world!</h1>
-      </>
+    return (
+        <>
+            <GlobalStyle/>
+            <Home/>
+        </>
 
-  );
+    );
 }
 
 export default App;
