@@ -22,7 +22,7 @@ export default function PostTable(props) {
             width: 100,
             disableClickEventBubbling: true,
             renderCell: (params: CellParams) => {
-                const onClick = () => {
+                const onClick = (edit) => {
                     const api: GridApi = params.api;
                     const fields = api
                         .getAllColumns()
@@ -34,12 +34,12 @@ export default function PostTable(props) {
                         thisRow[f] = params.getValue(f);
                     });
 
-                    return alert(thisRow.body);
+                    return edit ? props.setForm(thisRow) : props.deletePost(thisRow.id);
                 };
 
                 return (
                     <>
-                        <IconButton size={15} onClick={onClick}>
+                        <IconButton size={15} onClick={() => {onClick(true)}}>
                             <FaEdit size={15}/>
                         </IconButton>
                         <IconButton size={15} onClick={onClick}>

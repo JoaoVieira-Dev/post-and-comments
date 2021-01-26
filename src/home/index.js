@@ -1,11 +1,16 @@
 import React, {useEffect, useState} from "react";
-import { Header, useStyles} from "./styled";
+import {Header, useStyles} from "./styled";
 import {Button, Typography} from "@material-ui/core";
 import {bottonColor, textColor} from "../colors";
-import PostTable from "./PostTable";
+import PostTable from "./components/PostTable";
+import ModalForm from "./components/ModalForm";
+import {deletePost, savePost} from "../services/api";
 
 export default function Home() {
     const [data, setData] = useState([]);
+    const [isOpen, setIsOpen] = useState(false);
+    const [dataEdit, setDataEdit] = useState({});
+    const [isLoading, setIsLoading] = useState(false);
     const classes = useStyles();
 
     useEffect(() => {
@@ -16,6 +21,20 @@ export default function Home() {
         };
         fetchData();
     }, []);
+
+    const handleClose = () => {
+        setDataEdit({})
+        setIsOpen(false);
+    }
+
+    const submitFormLoading = () => {
+        setIsLoading(true);
+    }
+
+    const editPostForm = (props) => {
+        setDataEdit(props);
+        setIsOpen(true);
+    }
 
     return (
         <>
@@ -31,15 +50,27 @@ export default function Home() {
                         marginLeft: 100
                     }}
                     variant={"contained"}
-                    onClick={() => {}}
+                    onClick={() => {
+                        setIsOpen(true);
+                    }}
                 >
                     <Typography>Inserir</Typography>
                 </Button>
             </Header>
-
-                <PostTable
-                    data={data}
-                />
+            <PostTable
+                data={data}
+                setDataEdit={setDataEdit}
+                deletePost={deletePost}
+                setForm={editPostForm}
+            />
+            <ModalForm
+                isOpen={isOpen}
+                handleClose={handleClose}
+                data={dataEdit}
+                isLoading={isLoading}
+                submitFormLoading={submitFormLoading}
+                savePost={savePost}
+            />
         </>
 
     );
